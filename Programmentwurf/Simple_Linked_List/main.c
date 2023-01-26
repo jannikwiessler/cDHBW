@@ -41,8 +41,8 @@ int main() {
 
     start->nextElem = NULL;
 
-    int FLAGG = 1;
-    while (FLAGG) {
+    int FLAG = 1;
+    while (FLAG) {
         printf("1... print list\n");
         printf("2... add element\n");
         printf("3... delete element\n");
@@ -51,10 +51,10 @@ int main() {
         printf("6... load list\n");
         printf("7... sort list\n");
         printf("0... quit\n");
-        scanf("%d", &FLAGG);
+        scanf("%d", &FLAG);
         system("cls"); // clear for mac/linux
 
-        switch (FLAGG) {
+        switch (FLAG) {
             case 1:
                 printList(start);
                 break;
@@ -77,7 +77,7 @@ int main() {
                 sortList(start);
                 break;
             case 0:
-                FLAGG = 0;
+                FLAG = 0;
                 exitFcn(start);
                 break;
             default:
