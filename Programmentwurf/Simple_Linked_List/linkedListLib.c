@@ -30,24 +30,24 @@ void addListElem(listElement *start) {
     scanf("%d", &(new->age));
 }
 
-void printList(listElement *start) {
-
-    if (start->nextElem == NULL) {
+void printList(const listElement *list) {
+    if (list->nextElem == NULL) {
         printf("List is empty.\n");
-    } else {
-        int i = 0;
+        return;
+    }
 
-        listElement *currElem = start;
-        printf("\ncurrent list:\n\n");
+    list = list->nextElem;
 
-        do {
-            currElem = currElem->nextElem;
-            printf("%d", i);
-            i++;
-            printf("\t last name: %s\n", currElem->lastName);
-            printf("\t first name: %s\n", currElem->firstName);
-            printf("\t age: %d\n", currElem->age);
-        } while (currElem->nextElem != NULL);
+    printf("\ncurrent list:\n\n");
+
+    int index = 0;
+    while (list) {
+        printf("%d.", ++index);
+        printf("\t last name: %s\n", list->lastName);
+        printf("\t first name: %s\n", list->firstName);
+        printf("\t age: %d\n", list->age);
+
+        list = list->nextElem;
     }
 }
 
