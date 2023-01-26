@@ -10,7 +10,7 @@
 *
 * DATE: 2020-05-21
 *
-* DESCRIPTION:  Implementation of a simple linked list programm. 
+* DESCRIPTION:  Implementation of a simple linked list programm.
 *               UI-menu containing the following options:
 *                   >> print list
 *                   >> add element
@@ -30,18 +30,11 @@
 *   >> Practice of simple linked list
 *
 **/
-int main() {
-    listElement *start = malloc(sizeof(listElement));
 
-    if (start == NULL) {
-        printf("can't reserve storage.\n");
-        return -1;
-    }
+void cli(listElement *list) {
+    while (1) {
+        int FLAG = 1;
 
-    start->nextElem = NULL;
-
-    int FLAG = 1;
-    while (FLAG) {
         printf("1... print list\n");
         printf("2... add element\n");
         printf("3... delete element\n");
@@ -55,36 +48,46 @@ int main() {
 
         switch (FLAG) {
             case 1:
-                printList(start);
+                printList(list);
                 break;
             case 2:
-                addListElem(start);
+                addListElem(list);
                 break;
             case 3:
-                delListElem(start);
+                delListElem(list);
                 break;
             case 4:
-                delList(start);
+                delList(list);
                 break;
             case 5:
-                saveList(start);
+                saveList(list);
                 break;
             case 6:
-                loadList(start);
+                loadList(list);
                 break;
             case 7:
-                sortList(start);
+                sortList(list);
                 break;
             case 0:
-                FLAG = 0;
-                exitFcn(start);
-                break;
+                return;
             default:
                 printf("invalid choice\n");
                 break;
         }
     }
+}
 
-    return 0;
+int main() {
+    listElement *list = malloc(sizeof(listElement));
+
+    if (list == NULL) {
+        printf("can't reserve storage.\n");
+        return -1;
+    }
+
+    list->nextElem = NULL;
+
+    cli(list);
+    exitFcn(list);
 }
 
