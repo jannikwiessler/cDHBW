@@ -2,6 +2,15 @@
 #include <stdlib.h>
 #include <string.h>
 #include "linkedListLib.h"
+
+#if defined(_WIN32) || defined(_WIN64) || defined(__CYWIN__)
+#define clear() system("cls")
+#elif defined(__unix__) || defined(__APPLE__) || defined(__MACH__)
+#define clear() system("clear")
+#else
+#error "No method known to clear screen for your target OS"
+#endif
+
 /*******************************************************
 * NAME: main.c (main) 
 *
@@ -51,8 +60,7 @@ int main(){
 		printf("7... sort list\n");
         printf("0... quit\n");
         scanf("%d",&FLAGG);
-        system("cls"); // clear for mac/linux
-
+        clear();
 
         switch (FLAGG){
             case 1: printList(start); break;
