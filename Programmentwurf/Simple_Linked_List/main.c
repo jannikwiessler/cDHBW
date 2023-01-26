@@ -31,8 +31,7 @@
 *
 **/
 int main() {
-    listElement *start;
-    start = (listElement *) malloc(sizeof(listElement));
+    listElement *start = malloc(sizeof(listElement));
 
     if (start == NULL) {
         printf("can't reserve storage.\n");

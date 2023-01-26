@@ -3,8 +3,7 @@
 #include "linkedListLib.h"
 
 void addListElem(listElement *start) {
-    listElement *new;
-    new = (listElement *) malloc(sizeof(listElement));
+    listElement *new = malloc(sizeof(listElement));
 
     if (new == NULL) {
         printf("can't reserve storage.\n");
