@@ -31,13 +31,7 @@
 **/
 int main(){
 
-    listElement *start;
-    start = (listElement *)malloc(sizeof(listElement));
-    if (start == NULL) {
-        printf("can't reserve storage.\n"); 
-        return -1;
-        }
-    start->nextElem = NULL;
+    listElement *list = NULL;
 
     int FLAGG = 1;
     while (FLAGG){
@@ -55,14 +49,14 @@ int main(){
 
 
         switch (FLAGG){
-            case 1: printList(start); break;
-            case 2: addListElem(start); break;
-            case 3: delListElem(start); break;
-            case 4: delList(start); break;
-			case 5: saveList(start); break;
-			case 6: loadList(start); break;
-            case 7: sortList(start); break;
-            case 0: FLAGG = 0; exitFcn(start); break;
+            case 1: printList(list); break;
+            case 2: list = addListElem(list); break;
+            case 3: list = delListElem(list); break;
+            case 4: delList(list); list = NULL; break;
+			case 5: saveList(list); break;
+			case 6: list = loadList(list); break;
+            case 7: list = sortList(list); break;
+            case 0: FLAGG = 0; exitFcn(list); break;
             default: printf("invalid choice\n"); break;
         }
     }

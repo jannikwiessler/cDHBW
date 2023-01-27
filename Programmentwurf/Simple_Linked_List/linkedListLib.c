@@ -3,7 +3,7 @@
 #include <string.h>
 #include "linkedListLib.h"
 
-void addListElem(listElement *start)
+listElement *addListElem(listElement *list)
 {
 
     listElement *new;
@@ -11,14 +11,8 @@ void addListElem(listElement *start)
     if (new == NULL)
     {
         printf("can't reserve storage.\n");
-        return;
+        return NULL;
     }
-
-    listElement *currElem = start;
-    while (currElem->nextElem != NULL)
-        currElem = currElem->nextElem; // get last elem in list
-    currElem->nextElem = new;          // add new to the end of list
-    new->nextElem = NULL;
 
     /* fill data in new element */
     printf("Please enter last name: \n");
@@ -27,31 +21,41 @@ void addListElem(listElement *start)
     scanf("%s", new->firstName);
     printf("Please enter age: \n");
     scanf("%d", &(new->age));
+
+    new->nextElem = NULL;
+
+    if(!list) return new;
+
+    listElement *currElem = list;
+    while (currElem->nextElem != NULL)
+        currElem = currElem->nextElem; // get last elem in list
+    currElem->nextElem = new;          // add new to the end of list
 }
 
-void printList(listElement *start)
+void printList(const listElement *list)
 {
 
-    if (start->nextElem == NULL)
+    if (list == NULL)
         printf("List is empty.\n");
     else
     {
         int i = 0;
-        listElement *currElem = start;
+        const listElement *currElem = list;
         printf("\ncurrent list:\n\n");
         do
         {
-            currElem = currElem->nextElem;
             printf("%d", i);
             i++;
             printf("\t last name: %s\n", currElem->lastName);
             printf("\t first name: %s\n", currElem->firstName);
             printf("\t age: %d\n", currElem->age);
-        } while (currElem->nextElem != NULL);
+
+            currElem = currElem->nextElem;
+        } while (currElem != NULL);
     }
 }
 
-void delListElem(listElement *start)
+listElement *delListElem(listElement *list)
 {
 
     /* YOUR CODE HERE */
@@ -60,7 +64,7 @@ void delListElem(listElement *start)
     printf("\n>> delListElem fcn is tbd.\n\n");
 }
 
-void delList(listElement *start)
+void delList(listElement *list)
 {
 
     /* YOUR CODE HERE */
@@ -69,11 +73,11 @@ void delList(listElement *start)
     printf("\n>> getLenOfList fcn is tbd.\n\n");
 }
 
-int getLenOfList(listElement *start)
+int getLenOfList(const listElement *list)
 { // we use this for save list fcn
 
     int counter = 0;
-    listElement *currElem = start;
+    const listElement *currElem = list;
     while (currElem->nextElem != NULL)
     { // get last elem in list
         currElem = currElem->nextElem;
@@ -82,7 +86,7 @@ int getLenOfList(listElement *start)
     return counter;
 }
 
-void saveList(listElement *start)
+void saveList(const listElement *list)
 {
 
     /* YOUR CODE HERE */
@@ -91,7 +95,7 @@ void saveList(listElement *start)
     printf("\n>> saveList fcn is tbd.\n\n");
 }
 
-void loadList(listElement *start)
+listElement *loadList(listElement *list)
 {
 
     /* YOUR CODE HERE */
@@ -100,16 +104,16 @@ void loadList(listElement *start)
     printf("\n>> loadList fcn is tbd.\n\n");
 
     printf("loading data will be append to current list...\n");
-    printList(start); // show loaded list
+    printList(list); // show loaded list
 }
 
-void exitFcn(listElement *start)
+void exitFcn(const listElement *list)
 {
 
     printf("\n>> exitFcn fcn is tbd.\n\n");
 }
 
-void sortList(listElement *start)
+listElement *sortList(listElement *list)
 {
 
     printf("\n>>sortList fcn is tbd.\n\n");
