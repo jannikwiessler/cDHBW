@@ -1,19 +1,16 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 #include "eulerLib.h"
 
-#define NUM_OF_STATES 2
-
-void massSpringDamperCalculation(double *rhs, double *y)
+SimulationState massSpringDamperCalculation(SimulationState state, double duration)
 { // mass spring damper
 
     double m = 1.0;  // mass of object
     double c = 5;    // spring constant
     double d = 0.25; // damper constant
 
-    double x = y[0]; // position
-    double v = y[1]; // speed
+    double x = state.position;
+    double v = state.velocity;
 
     /*calc derivatives and store in rhs*/
 
@@ -74,29 +71,22 @@ SimulationHandle getHandle()
     /* ---------------*/
 }
 
-void calculateSimulation(SimulationHandle *handle)
+void calculateSimulation(const SimulationHandle *handle)
 { // this is called only once
-    int numOfStates = handle->numOfStates;
     int integratorSteps = (int)ceil(handle->duration / handle->stepSize);
 
     /*write init states*/
-    for (int i = 0; i < numOfStates; i++)
+    for (int i = 0; i < handle->stateCount; i++)
     {
-        handle->stateVec[i] = handle->stateVecInit[i];
+        handle->states[i] = handle->initialState;
     }
+
     for (int i = 0; i < integratorSteps; i++)
     {
         /*get derivatives*/
 
         /* YOUR CODE HERE */
         /* ---------------*/
-        for (int j = 0; j < numOfStates; j++)
-        {
-            /*euler step*/
-
-            /* YOUR CODE HERE */
-            /* ---------------*/
-        }
     }
 }
 

@@ -1,5 +1,7 @@
 #ifndef EULERLIB_H_
 #define EULERLIB_H_
+
+#include "stdlib.h"
 /** 
     \STRUCT: SimulationHandle
  
@@ -25,14 +27,17 @@
 
 */
 
-typedef void(*SimulationCalculation)(double *, double*);
+typedef struct {
+    double position;
+    double velocity;
+} SimulationState;
+
+typedef SimulationState (*SimulationCalculation)(SimulationState state);
 
 typedef struct {
     SimulationCalculation function;
-    double* stateVec;
-    double* stateVecInit;
-    double* derivationStateVec;
-    int numOfStates;
+    SimulationState *states;
+    SimulationState initialState;
     double stepSize;
     double duration;
 } SimulationHandle;
@@ -50,7 +55,7 @@ typedef struct {
 
     \param[in]  reference to storage vector for derivatives [out]
 */
-void massSpringDamperCalculation(double*, double*);
+SimulationState massSpringDamperCalculation(SimulationState state, double duration);
 
 /** 
     \FUNCTION: calculateSimulation
@@ -64,7 +69,7 @@ void massSpringDamperCalculation(double*, double*);
     \param[in]  reference to SimulationHandle
 
 */
-void calculateSimulation(SimulationHandle*);
+void calculateSimulation(const SimulationHandle *handle);
 
 /** 
     \FUNCTION: plotSimulation
