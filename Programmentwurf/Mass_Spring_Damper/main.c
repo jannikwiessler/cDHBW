@@ -19,8 +19,7 @@
 int main()
 {
 
-    SimulationHandle handle;
-    initHandle(&handle);
+    SimulationHandle handle = getHandle();
     calculateSimulation(&handle);
     plotSimulation(&handle);
 

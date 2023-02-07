@@ -9,7 +9,7 @@
 
     \DESCRIPTION: definition of handle to simulate first order ode-system as struct
 
-    \CONTAINS:  [void* f] rhs-function
+    \CONTAINS:  [void* function] rhs-function
 
                 [double* stateVec] states-array for all timesteps (t_0 ... t_end)
 
@@ -35,8 +35,7 @@ typedef struct {
     int numOfStates;
     double stepSize;
     double duration;
-};
-typedef struct SimHandle SimulationHandle;
+} SimulationHandle;
 
 /** 
     \FUNCTION: massSpringDamperCalculation
@@ -82,7 +81,7 @@ void calculateSimulation(SimulationHandle*);
 void plotSimulation(SimulationHandle*);
 
 /** 
-    \FUNCTION: initHandle
+    \FUNCTION: getHandle
  
     \AUTHOR: jannik wiessler
 
@@ -93,6 +92,6 @@ void plotSimulation(SimulationHandle*);
     \param[in]  reference to SimulationHandle
 
 */
-void initHandle(SimulationHandle*);
+SimulationHandle getHandle();
 
 #endif

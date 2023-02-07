@@ -21,7 +21,7 @@ void massSpringDamperCalculation(double *rhs, double *y)
     /* ---------------*/
 }
 
-void initHandle(SimulationHandle *)
+SimulationHandle getHandle()
 {
 
     /*num of states*/
