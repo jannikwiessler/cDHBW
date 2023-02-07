@@ -1,6 +1,3 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
 #include "eulerLib.h"
 /*******************************************************
 * NAME: main.c (main) 
@@ -22,11 +19,10 @@
 int main()
 {
 
-    simHandle myHandle;
-    simHandle *handle = &myHandle;
-    eulerSettings_MSD(handle);
-    eulerForward(handle);
-    showResults_MSD(handle);
+    SimulationHandle handle;
+    initHandle(&handle);
+    calculateSimulation(&handle);
+    plotSimulation(&handle);
 
     return 0;
 }
