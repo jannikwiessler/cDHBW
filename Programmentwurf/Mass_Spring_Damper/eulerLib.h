@@ -37,7 +37,6 @@ typedef SimulationState (*SimulationCalculation)(SimulationState state);
 typedef struct {
     SimulationCalculation function;
     SimulationState *states;
-    SimulationState initialState;
     double stepSize;
     double duration;
 } SimulationHandle;

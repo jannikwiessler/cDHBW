@@ -75,12 +75,6 @@ void calculateSimulation(const SimulationHandle *handle)
 { // this is called only once
     int integratorSteps = (int)ceil(handle->duration / handle->stepSize);
 
-    /*write init states*/
-    for (int i = 0; i < handle->stateCount; i++)
-    {
-        handle->states[i] = handle->initialState;
-    }
-
     for (int i = 0; i < integratorSteps; i++)
     {
         /*get derivatives*/
