@@ -39,7 +39,7 @@ int main(){
         }
     start->nextElem = NULL;
 
-    int FLAGG = 1;
+    int FLAGG = -1;
     while (FLAGG){
     
         printf("1... print list\n");
@@ -50,9 +50,10 @@ int main(){
 		printf("6... load list\n");
 		printf("7... sort list\n");
         printf("0... quit\n");
-        scanf("%d",&FLAGG);
-        system("cls"); // clear for mac/linux
 
+        FLAGG = numberInput(1);
+
+        system("cls"); // clear for mac/linux
 
         switch (FLAGG){
             case 1: printList(start); break;

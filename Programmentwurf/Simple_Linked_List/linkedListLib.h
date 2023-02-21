@@ -1,5 +1,8 @@
 #ifndef HA03_LINKEDLISTLIB_H_
 #define HA03_LINKEDLISTLIB_H_
+
+#include <stdlib.h>
+
 /** 
     \STRUCT: listElement
  
@@ -16,6 +19,8 @@ struct listElem{
     struct listElem *nextElem;
 };
 typedef struct listElem listElement;
+
+int numberInput(size_t maxDigits);
 
 /** 
     \FUNCTION: addListElem
