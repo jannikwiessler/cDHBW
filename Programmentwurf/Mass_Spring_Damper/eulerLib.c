@@ -1,19 +1,16 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 #include "eulerLib.h"
 
-#define NUMOFSTATES 2
-
-void RHS_MSD(double *rhs, double *y)
+SimulationState massSpringDamperCalculation(SimulationState state, double duration)
 { // mass spring damper
 
     double m = 1.0;  // mass of object
-    double c = 5;    // feder constant
+    double c = 5;    // spring constant
     double d = 0.25; // damper constant
 
-    double x = y[0]; // position
-    double v = y[1]; // speed
+    double x = state.position;
+    double v = state.velocity;
 
     /*calc derivatives and store in rhs*/
 
@@ -21,7 +18,7 @@ void RHS_MSD(double *rhs, double *y)
     /* ---------------*/
 }
 
-void eulerSettings_MSD(simHandle *handle)
+SimulationHandle getHandle()
 {
 
     /*num of states*/
@@ -39,14 +36,14 @@ void eulerSettings_MSD(simHandle *handle)
     /* YOUR CODE HERE */
     /* ---------------*/
 
-    /*get user defined Simtime*/
-    printf("Simtime (in s): \n");
+    /*get user defined simulation time*/
+    printf("Simulation time (in s): \n");
 
     /* YOUR CODE HERE */
     /* ---------------*/
 
-    /*get user defined StepSize*/
-    printf("StepSize (in s): \n");
+    /*get user defined step size*/
+    printf("Step size (in s): \n");
 
     /* YOUR CODE HERE */
     /* ---------------*/
@@ -74,33 +71,20 @@ void eulerSettings_MSD(simHandle *handle)
     /* ---------------*/
 }
 
-void eulerForward(simHandle *handle)
+void calculateSimulation(const SimulationHandle *handle)
 { // this is called only once
-    int numOfStates = handle->numOfStates;
-    int integratorSteps = (int)ceil(handle->simTime / handle->stepSize);
+    int integratorSteps = (int)ceil(handle->duration / handle->stepSize);
 
-    /*write init states*/
-    for (int i = 0; i < numOfStates; i++)
-    {
-        handle->stateVec[i] = handle->stateVecInit[i];
-    }
     for (int i = 0; i < integratorSteps; i++)
     {
         /*get derivatives*/
 
         /* YOUR CODE HERE */
         /* ---------------*/
-        for (int j = 0; j < numOfStates; j++)
-        {
-            /*euler step*/
-
-            /* YOUR CODE HERE */
-            /* ---------------*/
-        }
     }
 }
 
-void showResults_MSD(simHandle *handle)
+void plotSimulation(SimulationHandle *)
 {
 
     /*print data to text file*/

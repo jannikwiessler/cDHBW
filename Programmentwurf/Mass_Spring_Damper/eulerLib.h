@@ -1,7 +1,9 @@
 #ifndef EULERLIB_H_
 #define EULERLIB_H_
+
+#include "stdlib.h"
 /** 
-    \STRUCT: simHandle
+    \STRUCT: SimulationHandle
  
     \AUTHOR: jannik wiessler
 
@@ -9,34 +11,38 @@
 
     \DESCRIPTION: definition of handle to simulate first order ode-system as struct
 
-    \CONTAINS:  [void* f] rhs-function
+    \CONTAINS:  [void* function] rhs-function
 
                 [double* stateVec] states-array for all timesteps (t_0 ... t_end)
 
                 [double* stateVecInit] states-array with initial states (t = 0)
 
-                [double* derivStateVec] derivative-array for all timesteps (t_0 ... t_end)
+                [double* derivationStateVec] derivative-array for all timesteps (t_0 ... t_end)
 
                 [int numOfStates]: number of states in ode-system (two for mass-spring-damper-system)
 
                 [double stepSize]: timestepsize in seconds seconds for explicit euler method
 
-                [double simTime]: simTime in seconds for explicit euler method
+                [double simTime]: duration in seconds for explicit euler method
 
 */
-struct SimHandle {
-    void(*f)(double*, double*);
-    double* stateVec;
-    double* stateVecInit;
-    double* derivStateVec;
-    int numOfStates;
+
+typedef struct {
+    double position;
+    double velocity;
+} SimulationState;
+
+typedef SimulationState (*SimulationCalculation)(SimulationState state);
+
+typedef struct {
+    SimulationCalculation function;
+    SimulationState *states;
     double stepSize;
-    double simTime;
-};
-typedef struct SimHandle simHandle;
+    double duration;
+} SimulationHandle;
 
 /** 
-    \FUNCTION: RHS_MSD
+    \FUNCTION: massSpringDamperCalculation
  
     \AUTHOR: jannik wiessler
 
@@ -48,10 +54,10 @@ typedef struct SimHandle simHandle;
 
     \param[in]  reference to storage vector for derivatives [out]
 */
-void RHS_MSD(double*, double*);
+SimulationState massSpringDamperCalculation(SimulationState state, double duration);
 
 /** 
-    \FUNCTION: eulerForward
+    \FUNCTION: calculateSimulation
  
     \AUTHOR: jannik wiessler
 
@@ -59,13 +65,13 @@ void RHS_MSD(double*, double*);
 
     \DESCRIPTION: explicit euler function to solve first order ode-system
  
-    \param[in]  reference to simHandle 
+    \param[in]  reference to SimulationHandle
 
 */
-void eulerForward(simHandle*);
+void calculateSimulation(const SimulationHandle *handle);
 
 /** 
-    \FUNCTION: showResults_MSD
+    \FUNCTION: plotSimulation
  
     \AUTHOR: jannik wiessler
 
@@ -73,23 +79,23 @@ void eulerForward(simHandle*);
 
     \DESCRIPTION: visualize the results of given ode-system solved by given used sim method
  
-    \param[in]  reference to simHandle 
+    \param[in]  reference to SimulationHandle
 
 */
-void showResults_MSD(simHandle*);
+void plotSimulation(SimulationHandle*);
 
 /** 
-    \FUNCTION: eulerSettings_MSD
+    \FUNCTION: getHandle
  
     \AUTHOR: jannik wiessler
 
     \DATE: 2021-01-10
 
-    \DESCRIPTION: initialize simHandle by user defined specs
+    \DESCRIPTION: initialize SimulationHandle by user defined specs
  
-    \param[in]  reference to simHandle 
+    \param[in]  reference to SimulationHandle
 
 */
-void eulerSettings_MSD(simHandle*);
+SimulationHandle getHandle();
 
 #endif
