@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "linkedListLib.h"
+
 /*******************************************************
 * NAME: main.c (main) 
 *
@@ -9,7 +9,7 @@
 *
 * DATE: 2020-05-21
 *
-* DESCRIPTION:  Implementation of a simple linked list programm. 
+* DESCRIPTION:  Implementation of a simple linked list programm.
 *               UI-menu containing the following options:
 *                   >> print list
 *                   >> add element
@@ -29,43 +29,64 @@
 *   >> Practice of simple linked list
 *
 **/
-int main(){
 
-    listElement *start;
-    start = (listElement *)malloc(sizeof(listElement));
-    if (start == NULL) {
-        printf("can't reserve storage.\n"); 
-        return -1;
-        }
-    start->nextElem = NULL;
+void cli(listElement *list) {
+    while (1) {
+        int FLAG = 1;
 
-    int FLAGG = 1;
-    while (FLAGG){
-    
         printf("1... print list\n");
         printf("2... add element\n");
         printf("3... delete element\n");
         printf("4... delete list\n");
-		printf("5... save list\n");
-		printf("6... load list\n");
-		printf("7... sort list\n");
+        printf("5... save list\n");
+        printf("6... load list\n");
+        printf("7... sort list\n");
         printf("0... quit\n");
-        scanf("%d",&FLAGG);
+        scanf("%d", &FLAG);
         system("cls"); // clear for mac/linux
 
-
-        switch (FLAGG){
-            case 1: printList(start); break;
-            case 2: addListElem(start); break;
-            case 3: delListElem(start); break;
-            case 4: delList(start); break;
-			case 5: saveList(start); break;
-			case 6: loadList(start); break;
-            case 7: sortList(start); break;
-            case 0: FLAGG = 0; exitFcn(start); break;
-            default: printf("invalid choice\n"); break;
+        switch (FLAG) {
+            case 1:
+                printList(list);
+                break;
+            case 2:
+                addListElem(list);
+                break;
+            case 3:
+                delListElem(list);
+                break;
+            case 4:
+                delList(list);
+                break;
+            case 5:
+                saveList(list);
+                break;
+            case 6:
+                loadList(list);
+                break;
+            case 7:
+                sortList(list);
+                break;
+            case 0:
+                return;
+            default:
+                printf("invalid choice\n");
+                break;
         }
     }
-    return 0;
+}
+
+int main() {
+    listElement *list = malloc(sizeof(listElement));
+
+    if (list == NULL) {
+        printf("can't reserve storage.\n");
+        return -1;
+    }
+
+    list->nextElem = NULL;
+
+    cli(list);
+    exitFcn(list);
 }
 

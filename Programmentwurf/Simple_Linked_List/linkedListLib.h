@@ -41,7 +41,7 @@ void addListElem(listElement *);
  
     \param[in]  pointer to start element of current list              
 */
-void printList(listElement *);
+void printList(const listElement *list);
 
 /** 
     \FUNCTION: delListElem
